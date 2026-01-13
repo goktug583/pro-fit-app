@@ -3,7 +3,7 @@ import math
 
 app = Flask(__name__)
 
-# --- HESAPLAMA MOTORU ---
+
 
 def calc_bmi(weight, height):
     if height <= 0: return 0
@@ -53,15 +53,15 @@ def calc_navy_body_fat(waist, neck, height, gender):
         log_h = math.log10(height_cm)
         return 495 / (1.0324 - 0.19077 * log_wn + 0.15456 * log_h) - 450
     else:
-        # Kadınlar için basit Navy formülü (Kalçasız versiyonu - yaklaşık)
+        
         if waist - neck <= 0: return 0
-        log_wn = math.log10(waist - neck) # Kadınlarda kalça da gerekir ama şimdilik basitleştirilmiş
+        log_wn = math.log10(waist - neck) 
         log_h = math.log10(height_cm)
-        # Bu sadece placeholder, kadınlar için kalça ölçüsü şarttır.
+        
         return 0
 
 def assess_risk_internal(bmi, navy_body_fat):
-    # 1. DURUM: Kullanıcı Ölçü GİRDİ (Navy > 0)
+    
     if navy_body_fat > 0:
         fat_pct = navy_body_fat
         origin = "Navy Metodu (Gerçek)"
@@ -72,7 +72,7 @@ def assess_risk_internal(bmi, navy_body_fat):
         elif 18 <= fat_pct < 25: status = "Ortalama"
         else: status = "Yağlı"
 
-        # KASLI MI KONTROLÜ
+       
         if bmi > 25 and fat_pct < 18:
             verdict = "SONUÇ: Kaslı/Atletik (BMI Geçersiz)"
             comment = f"BMI ({bmi:.2f}) yüksek ama ölçüleriniz fit olduğunuzu kanıtlıyor."
@@ -80,13 +80,13 @@ def assess_risk_internal(bmi, navy_body_fat):
             verdict = f"SONUÇ: {status}"
             comment = f"Ölçümlerinize göre durumunuz: {status}"
             
-    # 2. DURUM: Kullanıcı Ölçü GİRMEDİ (Sadece BMI Analizi)
+   
     else:
         origin = "BMI (Tahmini)"
-        # Göstergelik tahmin (Sadece ekranda boş kalmasın diye)
+        
         fat_pct = (1.20 * bmi) + (0.23 * 25) - 16.2 
         
-        # BMI Sınıflandırması ve Yorumu
+        
         if bmi < 18.5: 
             verdict = "SONUÇ: Zayıf"
             comment = "Kilonuz boyunuza göre düşük. Sağlıklı kilo alımı için kalori fazlası oluşturmalısınız."
@@ -105,7 +105,6 @@ def assess_risk_internal(bmi, navy_body_fat):
         
     return {'fat_pct': fat_pct, 'final_verdict': verdict, 'bmi_comment': comment}
 
-# --- FLASK ---
 
 @app.route('/', methods=['GET'])
 def index():
@@ -114,7 +113,7 @@ def index():
 @app.route('/calculate', methods=['POST'])
 def calculate():
     try:
-        # Verileri güvenli şekilde al
+        
         weight_input = request.form.get('weight', '')
         height_input = request.form.get('height', '')
         
@@ -124,7 +123,7 @@ def calculate():
         weight = float(weight_input)
         height = float(height_input)
         
-        # --- AKILLI BOY DÜZELTME ---
+        
         if height > 3: 
             height = height / 100
             
@@ -133,7 +132,7 @@ def calculate():
         activity = request.form.get('activity', 'sedentary')
         goal = request.form.get('goal', 'lose')
         
-        # Opsiyonel Alanlar
+        
         try:
             neck_val = request.form.get('neck')
             waist_val = request.form.get('waist')
@@ -146,7 +145,7 @@ def calculate():
         if height <= 0 or weight <= 0:
             return render_template('index.html', error_message="Hatalı giriş.")
 
-        # Hesaplamalar
+     
         bmi = calc_bmi(weight, height)
         bmr = calc_bmr(weight, height, age, gender)
         tdee = calc_tdee(bmr, activity)
