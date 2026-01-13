@@ -6,8 +6,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
     :root {
-        --primary: #00fff2; /* Neon Camgöbeği */
-        --accent: #7000ff;  /* Neon Mor */
+        --primary: #00fff2; 
+        --accent: #7000ff;
         --dark: #050505;
         --glass: rgba(255, 255, 255, 0.05);
         --border: rgba(255, 255, 255, 0.1);
@@ -28,7 +28,7 @@
         overflow: hidden;
     }
 
-    /* İMLEÇ */
+ 
     .cursor {
         width: 20px; height: 20px;
         border: 2px solid var(--primary);
@@ -50,7 +50,7 @@
         transform: translate(-50%, -50%);
     }
 
-    /* ARKA PLAN (NEBULA) */
+    
     .nebula {
         position: fixed;
         width: 600px; height: 600px;
@@ -62,9 +62,9 @@
     .nebula:nth-child(2) { bottom: -10%; right: -10%; background: radial-gradient(circle, var(--primary) 0%, transparent 70%); animation-delay: -5s; }
     @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, 50px) scale(1.1); } }
 
-    /* KART (SABİT) */
+    
     .glass-card {
-        width: 1100px; /* Genişlettik */
+        width: 1100px; 
         background: var(--glass);
         backdrop-filter: blur(30px);
         -webkit-backdrop-filter: blur(30px);
@@ -72,7 +72,7 @@
         border-radius: 30px;
         padding: 50px;
         display: grid;
-        grid-template-columns: 0.8fr 1.2fr; /* Sağ tarafı genişlettik */
+        grid-template-columns: 0.8fr 1.2fr; 
         gap: 50px;
         box-shadow: 0 40px 80px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.05);
     }
@@ -84,7 +84,7 @@
     }
     .subtitle { color: var(--subtext); margin-bottom: 30px; letter-spacing: 2px; font-size: 10px; text-transform: uppercase; }
 
-    /* FORM */
+ 
     .input-row { display: flex; gap: 15px; margin-bottom: 15px; }
     .input-wrapper { flex: 1; position: relative; }
 
@@ -106,7 +106,7 @@
     }
     button:hover { background: var(--primary); box-shadow: 0 0 30px var(--primary); transform: translateY(-2px); }
 
-    /* SONUÇLAR */
+    
     .result-box {
         display: flex; flex-direction: column; justify-content: center;
         border-left: 1px solid var(--border); padding-left: 50px;
@@ -122,7 +122,7 @@
     .stat-val-med { font-size: 24px; font-weight: 700; color: #fff; }
     .stat-lbl { font-size: 10px; color: var(--subtext); letter-spacing: 1px; margin-top: 5px; display: block; }
 
-    /* Detaylı Veriler */
+    
     .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
     .detail-item { text-align: center; }
     .detail-val { font-size: 18px; font-weight: 700; color: var(--accent); }
@@ -148,7 +148,7 @@
 <div class="cursor-dot"></div>
 
 <div class="glass-card">
-    <!-- SOL: FORM -->
+    
     <div>
         <h1>PRO.FIT</h1>
         <div class="subtitle">Vücut Analiz Sistemi v3.0</div>
@@ -176,10 +176,10 @@
         </form>
     </div>
 
-    <!-- SAĞ: SONUÇLAR -->
+   
     <div class="result-box">
         {% if bmi is defined %}
-            <!-- ÜST BÖLÜM: ANA İSTATİSTİKLER -->
+         
             <div class="main-stats">
                 <div class="stat-block">
                     <span class="stat-val-big">{{ bmi }}</span>
@@ -191,7 +191,7 @@
                 </div>
             </div>
 
-            <!-- ORTA BÖLÜM: DETAYLI VERİLER (BMR, TDEE, KALORİ) -->
+            
             <div class="detail-grid">
                 <div class="detail-item">
                     <div class="detail-val" style="color:#fff;">{{ bmr }}</div>
@@ -207,7 +207,7 @@
                 </div>
             </div>
 
-            <!-- ALT BÖLÜM: MAKROLAR (Protein, Yağ, Karb) -->
+            
             <div style="margin-bottom: 20px;">
                 <div style="font-size: 10px; color: var(--subtext); margin-bottom: 5px; letter-spacing: 1px;">MAKRO BESİNLER</div>
                 <div class="detail-grid">
@@ -226,7 +226,7 @@
                 </div>
             </div>
 
-            <!-- SONUÇ YORUMU -->
+          
             <div class="verdict">
                 <div class="verdict-title">SİSTEM ANALİZİ</div>
                 <div class="verdict-text">{{ overall_assessment }}</div>

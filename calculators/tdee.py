@@ -1,4 +1,4 @@
-# calculators/tdee.py
+
 
 def calc_tdee(bmr, activity_level):
     """BMR'ı ve aktivite seviyesini alarak TDEE'yi hesaplar."""
@@ -11,6 +11,6 @@ def calc_tdee(bmr, activity_level):
         'very_active': 1.9,
     }
     
-    # Gelen string'i sözlükte arar, bulamazsa varsayılan 1.2 kullanır.
+    
     multiplier = multipliers.get(activity_level.lower(), 1.2)
     return bmr * multiplier

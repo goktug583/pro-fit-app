@@ -1,8 +1,8 @@
 def assess_risk(bmi, navy_body_fat, activity):
-    # KODUN ÇALIŞTIĞINI KANITLAYAN İMZA
+    
     print(f"--- ANALİZ MODÜLÜ DEVREDE (BMI: {bmi}, YAĞ: {navy_body_fat}) ---")
 
-    # --- DURUM 1: KULLANICI ÖLÇÜ GİRDİ (Navy Metodu) ---
+  
     if navy_body_fat > 0:
         fat_percentage = navy_body_fat
         origin = "Navy Metodu (Gerçek)"
@@ -13,7 +13,7 @@ def assess_risk(bmi, navy_body_fat, activity):
         elif 18 <= fat_percentage < 25: status = "Ortalama"
         else: status = "Yağlı"
 
-        # Kaslı mı?
+       
         if bmi > 25 and fat_percentage < 18:
             final_verdict = "SONUÇ: Kaslı/Atletik Vücut (BMI Yoksayıldı)"
             bmi_comment = f"BMI ({bmi:.2f}) yüksek ama ölçüleriniz kaslı olduğunuzu kanıtladı."
@@ -21,7 +21,7 @@ def assess_risk(bmi, navy_body_fat, activity):
             final_verdict = f"SONUÇ: {status}"
             bmi_comment = f"Ölçümlerinize göre vücut durumunuz: {status}"
 
-    # --- DURUM 2: KULLANICI ÖLÇÜ GİRMEDİ (Sadece BMI) ---
+    
     else:
         origin = "BMI (Tahmini)"
         fat_percentage = (1.20 * bmi) + (0.23 * 25) - 16.2 
